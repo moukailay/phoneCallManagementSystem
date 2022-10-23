@@ -14,14 +14,19 @@ public class AppareilEnregistreur implements IAppareil {
     }
 
     public void enregistrerAppel ( Appel appel , String numTel ) {
+        Contact contact1 = getContact( numTel );
+        appel.setContact( contact1 );
+        appels.put( appel.getNumero(),  appel);
+    }
+
+    private Contact getContact ( String numTel ) {
         Contact contact1 = null;
         for(Contact unContact: contacts)
             if ( unContact.getNumeroTel().equals( numTel ) ) {
                 contact1 = unContact;
                 break;
             }
-        appel.setContact( contact1 );
-        appels.put( appel.getNumero(),  appel);
+        return contact1;
     }
 
     public Contact consulterContact ( int numContact ) throws Exception {
